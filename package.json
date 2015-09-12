@@ -1,8 +1,8 @@
 {
-  "name": "Nifty Mink",
+  "name": "NiftyMink",
   "version": "0.1.0",
   "main": "server.js",
-  "description": "Everyday dashboard web app"
+  "description": "Everyday dashboard web app",
   "dependencies": {
     "express": "4.10.2",
     "socket.io": "1.2.0",
