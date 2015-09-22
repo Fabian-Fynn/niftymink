@@ -5,6 +5,7 @@
   "description": "Everyday dashboard web app",
   "dependencies": {
     "express": "4.10.2",
+    "mongoose": "^4.1.7",
     "socket.io": "1.2.0",
     "underscore": "^1.8.3"
   }
