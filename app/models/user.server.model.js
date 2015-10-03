@@ -8,7 +8,17 @@ var mongoose = require('mongoose'),
     crypto = require('crypto');
 
 var UserSchema = new Schema({
-  firstName: {
+  firstname: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  surname: {
+    type: String,
+    trim: true,
+    default: ''
+  },
+  email: {
     type: String,
     trim: true,
     default: ''
