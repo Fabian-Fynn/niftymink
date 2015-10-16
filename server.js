@@ -1,9 +1,3 @@
-/*
- @Author:
- Fabin Hoffmann
-*/
-
-
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -22,7 +16,7 @@ var mongoose = require('mongoose');
 var chalk = require('chalk');
 
 // Bootstrap db connection
-if ('development' == app.get('env')) {
+if ('development' === app.get('env')) {
   mongoose.connect(config.dev_db);
 }
 else {
@@ -33,6 +27,8 @@ else {
 fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
   if (~filename.indexOf('.js')) require(__dirname + '/app//models/' + filename)
 });
+
+var Image = require('./app/controllers/image.server.controller.js');
 
 //express
 app.set('port', process.env.PORT || 3000);
@@ -56,8 +52,21 @@ app.get('/users', function(req, res) {
 });
 
 //socket functions
-io.on('connection', function(socket){
-  console.log(chalk.black.bgCyan(' ♥ User connected ♥ '));
+io.on('connection', function(socket) {
+  console.log(chalk.black.bgMagenta(' ♥ User connected ♥ '));
+
+  socket.on('search-request', function(req){
+    console.log(chalk.black.bgWhite(' Searching for images '));
+    Image.search(req, function(res) {
+      if(res.imageurl) {
+        socket.emit('newBackground', res.imageurl);
+      } else if(res.error) {
+        if(res.error === 'No Results') {
+          socket.emit('search-no-results');
+        }
+      }
+    });
+  });
 });
 
 http.listen(4000, function(){

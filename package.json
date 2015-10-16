@@ -1,12 +1,13 @@
 {
   "name": "NiftyMink",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "server.js",
   "description": "Everyday dashboard web app",
   "dependencies": {
     "body-parser": "^1.14.1",
     "chalk": "^1.1.1",
     "express": "^4.13.3",
+    "flickrapi": "^0.3.36",
     "method-override": "^2.3.5",
     "mongoose": "^4.1.11",
     "monitor": "^0.6.10",
