@@ -21,7 +21,7 @@ $(document).ready(function (){
     $('body').css('background-image', 'none');
   });
 
-  $('#js-search-box').keypress(function(e) {
+  $('.search-box input').keypress(function(e) {
     if(e.which == 13) {
       socket.emit('search-request', $(this).val());
     }
