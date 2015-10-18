@@ -3,7 +3,9 @@ if (document.location.hostname == "localhost")
 else
   var socket = io.connect('http://niftymink.com', {path: "/public/socket.io"});
 
-$(document).ready(function (){
+$(document).ready(function(){
+  startTime();
+
   socket.on('connected', function(res){
   });
 
