@@ -1,0 +1,26 @@
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<div class="form-inline" id="login-form">
+  <div class="form-group" id="form_user">
+    <label for="user">User</label>
+    <input class="form-control" type="text" id="user" name="user" autofocus="focus">
+  </div>
+  <div class="form-group" id="form_pw">
+    <label for="pw">Password</label>
+    <input class="form-control" type="password" id="pw" name="pw">
+  </div>
+  <button class="btn btn-primary login-button">Login</button>
+  <button class="btn btn-info" id="register">Register</button>
+  <button class="btn btn-primary" id="logout">Logout</button>
+  <button class="btn btn-danger" id="delete">Delete Account</button>
+</div>
+<script>
+  $('.login-button').click(function(){
+    console.log("HERE");
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '../login');
+    form.style.display = 'hidden';
+    document.body.appendChild(form)
+    form.submit();
+  });
+</script>

@@ -68,3 +68,11 @@ h1, h2, h3, p {
 .right-container {
   height: 100%;
 }
+
+#name-field {
+  outline:none;
+}
+
+#name-field.editing {
+  border-bottom: 1px solid #fff;
+}

@@ -8,6 +8,7 @@
     "chalk": "^1.1.1",
     "express": "^4.13.3",
     "flickrapi": "^0.3.36",
+    "handlebars": "^4.0.3",
     "method-override": "^2.3.5",
     "mongoose": "^4.1.11",
     "monitor": "^0.6.10",
