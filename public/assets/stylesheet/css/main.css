@@ -2,7 +2,7 @@ body {
   background-color: #000;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: none no-repeat center center fixed;
+  background: url('https://farm1.staticflickr.com/310/20220621979_6dfef1dd19_b.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
