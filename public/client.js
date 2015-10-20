@@ -32,15 +32,18 @@ $(document).ready(function(){
   socket.on('newBackground', function(res){
     $('body').css('background-image', 'url(' + res + ')');
     localStorage.setItem('current-background', res);
+    renderLoader(false);
   });
 
   socket.on('search-no-results', function() {
     $('body').css('background-image', 'none');
+    renderLoader(false);
   });
 
   $('.search-box input').keypress(function(e) {
     if(e.which == 13) {
       socket.emit('search-request', $(this).val());
+      renderLoader(true);
     }
   });
 
@@ -85,15 +88,45 @@ function renderUsername() {
     username: "Enter name"
   };
 
+  var usernameSource = '<span id="name-field" contenteditable="true">{{username}}</span>';
+
   if (localStorage.getItem('user-name')) {
     context.username = localStorage.getItem('user-name');
-    var usernameSource = '<span id="name-field" contenteditable="true">{{username}}</span>';
-
   } else {
-    var usernameSource = '<span id="name-field" class="no-name" contenteditable="true">Enter name</span>';
+    context.username = 'Enter name';
   }
 
   var template = Handlebars.compile(usernameSource);
   var html = template(context);
   $('#username').html(html);
+}
+
+function renderLoader(show) {
+  var cubeSource = '<div class="cube">    <div class="ani1">\
+      <div class="front"><i></i><i></i><i></i></div>\
+      <div class="left"><i></i><i></i><i></i></div>\
+    </div>\
+    <div class="ani2">\
+      <div class="front"><i></i><i></i><i></i></div>\
+      <div class="bottom"><i></i><i></i><i></i></div>\
+    </div>\
+    <div class="ani3">\
+      <div class="front"><i></i><i></i><i></i></div>\
+      <div class="right"><i></i><i></i><i></i></div>\
+    </div>\
+    <div class="ani4">\
+      <div class="front"><i></i><i></i><i></i></div>\
+      <div class="top"><i></i><i></i><i></i></div>\
+    </div>\
+    <div class="shadow"></div>\
+  </div>';
+
+  var template = Handlebars.compile(cubeSource);
+  var html = template();
+
+  if (show) {
+    $('#loader').html(html);
+  } else {
+    $('#loader').html('');
+  }
 }

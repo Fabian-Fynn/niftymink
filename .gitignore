@@ -14,3 +14,10 @@ dist
 
 #flickr credentials
 config/flickr.js
+
+#scss files
+scss/
+.scss
+*.css.map
+.scssc
+.sass-cache/
