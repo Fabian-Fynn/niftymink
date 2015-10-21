@@ -22,7 +22,6 @@ body.home {
 }
 
 h1, h2, h3, p {
-  color: #fff;
 }
 
 .center {
@@ -74,9 +73,8 @@ h1, h2, h3, p {
   padding: 5px 5px 0 5px;
   background-color: transparent;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid;
   outline: none;
-  color: #fff;
   text-align: center;
 }
 
@@ -120,4 +118,27 @@ h1, h2, h3, p {
 
 .btn {
   font-size: 100%;
+}
+
+#schemeSwitch {
+  width: 20px;
+  height: 20px;
+  background: url('../../images/color-scheme.png') #fff;
+  border-radius: 50%;
+  background-size: contain;
+  float: right;
+  margin: 10px;
+  -webkit-transition-duration: 1s;
+  -moz-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  transition-duration: 1s;
+  -webkit-transition-property: -webkit-transform;
+  -moz-transition-property: -moz-transform;
+  -o-transition-property: -o-transform;
+  transition-property: transform;
+}
+
+.dark {
+  color: #202020;
+  border-color: #202020;
 }

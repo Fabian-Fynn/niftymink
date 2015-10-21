@@ -10,6 +10,7 @@ $(document).ready(function(){
 
   startTime();
   renderUsername();
+  setColorScheme(localStorage.getItem('scheme'));
 
   $('.login-button').click(function(){
     var form = document.createElement('form');
@@ -64,6 +65,7 @@ $(document).ready(function(){
     $(this).addClass('editing');
     $(this).focus();
   });
+
   $('#name-field').on('focusout blur', function(e) {
     $(this).removeClass('editing');
   });
@@ -74,6 +76,10 @@ $(document).ready(function(){
 
   $('#homeButton').click(function(e) {
     renderPage('index');
+  });
+
+  $('#schemeSwitch').click(function() {
+    setColorScheme();
   });
 
   renderPage('index');
@@ -135,8 +141,21 @@ function renderLoader(show) {
   }
 }
 
-function loadPartials() {
-  $.get('partials/partials.html', function(data){
-    window.d = data;
-  })
+function setColorScheme(scheme) {
+  if (!scheme) {
+    if (localStorage.getItem('scheme') === 'light') {
+      scheme = 'dark';
+    } else {
+      scheme = 'light';
+    }
+  }
+
+  localStorage.setItem('scheme', scheme);
+  if(scheme === 'dark'){
+    $('.colorized').addClass('dark');
+    $('#schemeSwitch').css("transform","rotate(180deg)");
+  } else {
+    $('.colorized').removeClass('dark');
+    $('#schemeSwitch').css("transform","" );
+  }
 }
