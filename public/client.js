@@ -40,13 +40,6 @@ $(document).ready(function(){
     renderLoader(false);
   });
 
-  $('.search-box input').keypress(function(e) {
-    if(e.which == 13) {
-      socket.emit('search-request', $(this).val());
-      renderLoader(true);
-    }
-  });
-
   $('#name-field').on('keypress', function(e) {
     if(e.which == 13) {
       setUsername($(this));
@@ -73,6 +66,8 @@ $(document).ready(function(){
   $('#name-field').on('focusout blur', function(e) {
     $(this).removeClass('editing');
   });
+
+  renderpage('imageSearch');
 });
 
 function setUsername($element) {
@@ -129,4 +124,10 @@ function renderLoader(show) {
   } else {
     $('#loader').html('');
   }
+}
+
+function loadPartials() {
+  $.get('partials/partials.html', function(data){
+    window.d = data;
+  })
 }

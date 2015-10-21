@@ -83,3 +83,7 @@ h1, h2, h3, p {
 #name-field.editing {
   border-bottom: 1px solid #fff;
 }
+
+#yield {
+  height: 100%;
+}

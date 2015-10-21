@@ -16,18 +16,14 @@
       <div class="col-xs-6 col-sm-1 col-md-1 left-container">
       </div>
       <div class="col-xs-6 col-sm-10 col-md-10 center-container">
-        <div class="clock">
+        <div class="clock index partial">
           <h1>00:00</h1>
           <div class="greeting">
             <p>Good <span class="day-time"></span>, <span id="username"></span>.</p>
           </div>
         </div>
-        <div class="search-box">
-          <h1>Image search</h1>
-          <br>
-          <input type="text">
-          <div id="loader"></div>
-        </div>
+
+        <div id="yield"></div> <!-- partials go here -->
       </div>
       <div class="col-xs-6 col-sm-1 col-md-1 right-container">
       </div>
@@ -35,6 +31,15 @@
     <div class="footer">
     </div>
   </body>
+  <script type="text/template" id="imageSearchSource">
+    <div class="search-box partial">
+      <h1>Image search</h1>
+      <br>
+      <input type="text">
+      <div id="loader"></div>
+    </div>
+  </script>
+    <script src="assets/javascript/render-page.js"></script>
     <script src="assets/javascript/clock.js"></script>
     <script src="client.js"></script>
 </html>
