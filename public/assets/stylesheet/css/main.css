@@ -123,8 +123,7 @@ h1, h2, h3, p {
 #schemeSwitch {
   width: 20px;
   height: 20px;
-  background: url('../../images/color-scheme.png') #fff;
-  border-radius: 50%;
+  background: url('../../images/color-scheme.png');
   background-size: contain;
   float: right;
   margin: 10px;
