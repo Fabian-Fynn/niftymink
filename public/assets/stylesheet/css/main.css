@@ -138,6 +138,13 @@ h1, h2, h3, p {
   transition-property: transform;
 }
 
+.colorized {
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
 .dark {
   color: #202020;
   border-color: #202020;
