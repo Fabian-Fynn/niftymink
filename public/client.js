@@ -68,7 +68,15 @@ $(document).ready(function(){
     $(this).removeClass('editing');
   });
 
-  renderPage('imageSearch');
+  $('#searchButton').click(function(e) {
+    renderPage('imageSearch');
+  });
+
+  $('#homeButton').click(function(e) {
+    renderPage('index');
+  });
+
+  renderPage('index');
 });
 
 function setUsername($element) {

@@ -17,6 +17,10 @@ body {
   background-color: rgba(32, 32, 32, 0.9);
 }
 
+body.home {
+  background: none;
+}
+
 h1, h2, h3, p {
   color: #fff;
 }
@@ -74,6 +78,32 @@ h1, h2, h3, p {
   outline: none;
   color: #fff;
   text-align: center;
+}
+
+#searchButton {
+  width: 20px;
+  height: 20px;
+  background: url('../../images/search.png');
+  background-size: contain;
+  float: right;
+  margin: 10px;
+}
+
+#searchButton .dark{
+  background: url('../../images/search-dark.png');
+}
+
+#homeButton {
+  width: 20px;
+  height: 20px;
+  background: url('../../images/home.png');
+  background-size: contain;
+  float: left;
+  margin: 10px;
+}
+
+#homeButton .dark {
+  background: url('../../images/home-dark.png');
 }
 
 #name-field {

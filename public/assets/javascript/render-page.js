@@ -3,7 +3,12 @@ function renderPage(request, resource) {
 
   if(!request || request === 'index') {
     $('.index').show();
+    $('#homeButton').hide();
+    $('body').addClass('home');
   } else {
+    $('#homeButton').show();
+    $('body').removeClass('home');
+
     var source;
 
     var selector = '#' + request + 'Source';
