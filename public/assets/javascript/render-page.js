@@ -32,6 +32,8 @@ function renderPage(request, resource) {
 function loadScripts(partial) {
   switch(partial) {
     case 'imageSearch':
+      $('.search-box input').focus();
+
       $('.search-box input').keypress(function(e) {
         if(e.which == 13) {
           var req = {
