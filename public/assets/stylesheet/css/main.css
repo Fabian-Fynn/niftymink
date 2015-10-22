@@ -87,8 +87,8 @@ h1, h2, h3, p {
   margin: 10px;
 }
 
-#searchButton .dark{
-  background: url('../../images/search-dark.png');
+.home #searchButton.dark{
+  background-image: url('../../images/search-dark.png');
 }
 
 #homeButton {
