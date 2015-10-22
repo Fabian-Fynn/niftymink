@@ -58,8 +58,8 @@ io.on('connection', function(socket) {
   socket.on('search-request', function(req){
     console.log(chalk.black.bgWhite(' Searching for images '));
     Image.search(req, function(res) {
-      if(res.imageurl) {
-        socket.emit('newBackground', res.imageurl);
+      if(res.images) {
+        socket.emit('newImages', res.images);
       } else if(res.error) {
         if(res.error === 'No Results') {
           socket.emit('search-no-results');

@@ -1,4 +1,4 @@
-function renderpage(request) {
+function renderPage(request, resource) {
   $('.partial').hide();
 
   if(!request || request === 'index') {
@@ -10,12 +10,19 @@ function renderpage(request) {
     source = $(selector).html();
 
     if(typeof source === 'undefined') {
-      renderpage('index');
+      renderPage('index');
       return
     }
 
+    var context;
+
+    if(request === 'imageGrid') {
+      context = {
+        images: resource
+      }
+    }
     var template = Handlebars.compile(source);
-    var html = template();
+    var html = template(context);
 
     $('#yield').html(html);
     loadScripts(request);
@@ -23,10 +30,27 @@ function renderpage(request) {
 }
 
 function loadScripts(partial) {
-  $('.search-box input').keypress(function(e) {
-    if(e.which == 13) {
-      socket.emit('search-request', $(this).val());
-      renderLoader(true);
-    }
-  });
+  switch(partial) {
+    case 'imageSearch':
+      $('.search-box input').keypress(function(e) {
+        if(e.which == 13) {
+          var req = {
+            query: $(this).val(),
+            page: 0
+          }
+
+          socket.emit('search-request', req);
+          renderLoader(true);
+        }
+      });
+
+      break;
+    case 'imageGrid':
+      $('#newImageSearch').click(
+        function() {
+          renderPage('imageSearch');
+        });
+      break;
+    default:
+  }
 }

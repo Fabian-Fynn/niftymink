@@ -8,24 +8,20 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/main.css">
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/loader.css">
+    <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/image-search.css">
   </head>
   <body>
     <div class="header">
     </div>
     <div class="center">
-      <div class="col-xs-6 col-sm-1 col-md-1 left-container">
-      </div>
-      <div class="col-xs-6 col-sm-10 col-md-10 center-container">
+      <div class="center-container">
         <div class="clock index partial">
           <h1>00:00</h1>
           <div class="greeting">
             <p>Good <span class="day-time"></span>, <span id="username"></span>.</p>
           </div>
         </div>
-
         <div id="yield"></div> <!-- partials go here -->
-      </div>
-      <div class="col-xs-6 col-sm-1 col-md-1 right-container">
       </div>
     </div>
     <div class="footer">
@@ -39,7 +35,19 @@
       <div id="loader"></div>
     </div>
   </script>
-    <script src="assets/javascript/render-page.js"></script>
-    <script src="assets/javascript/clock.js"></script>
-    <script src="client.js"></script>
+
+  <script type="text/template" id="imageGridSource">
+    <div class="partial" id="image-grid">
+
+      {{#each images}}
+        <div class="preview" style="background-image: url({{this.thumbnail_url}})"></div>
+      {{/each}}
+      <div class="btn" id="newImageSearch">New search</div>
+    </div>
+  </script>
+
+  <script src="assets/javascript/functions.js"></script>
+  <script src="assets/javascript/render-page.js"></script>
+  <script src="assets/javascript/clock.js"></script>
+  <script src="client.js"></script>
 </html>

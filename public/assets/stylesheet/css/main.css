@@ -1,5 +1,5 @@
-body {
-  background-color: #000;
+html {
+  height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background: url('https://farm1.staticflickr.com/310/20220621979_6dfef1dd19_b.jpg') no-repeat center center fixed;
@@ -7,8 +7,14 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+body {
   font-size: 1em;
   font-family: 'HelveticaNeue-Medium', 'Helvetica Neue Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #fff;
+  height: 100%;
+  background-color: rgba(32, 32, 32, 0.9);
 }
 
 h1, h2, h3, p {
@@ -29,12 +35,10 @@ h1, h2, h3, p {
   height: 5vh;
 }
 
-.left-container {
-  height: 100%;
-}
-
 .center-container {
   height: 100%;
+  width: 100vw;
+  padding: 0 9.5vw 0 9.5vw;
   text-align: center;
 }
 
@@ -72,10 +76,6 @@ h1, h2, h3, p {
   text-align: center;
 }
 
-.right-container {
-  height: 100%;
-}
-
 #name-field {
   outline: none;
 }
@@ -86,4 +86,8 @@ h1, h2, h3, p {
 
 #yield {
   height: 100%;
+}
+
+.btn {
+  font-size: 100%;
 }

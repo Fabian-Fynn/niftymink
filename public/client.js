@@ -5,7 +5,7 @@ else
 
 $(document).ready(function(){
   if (localStorage.getItem('current-background')) {
-    $('body').css('background-image', 'url(' + localStorage.getItem('current-background') + ')');
+    $('html').css('background-image', 'url(' + localStorage.getItem('current-background') + ')');
   }
 
   startTime();
@@ -29,9 +29,10 @@ $(document).ready(function(){
     logout();
   });
 
-  socket.on('newBackground', function(res){
-    $('body').css('background-image', 'url(' + res + ')');
-    localStorage.setItem('current-background', res);
+  socket.on('newImages', function(res){
+    renderPage('imageGrid', res);
+    //$('body').css('background-image', 'url(' + res + ')');
+    //localStorage.setItem('current-background', res);
     renderLoader(false);
   });
 
@@ -67,7 +68,7 @@ $(document).ready(function(){
     $(this).removeClass('editing');
   });
 
-  renderpage('imageSearch');
+  renderPage('imageSearch');
 });
 
 function setUsername($element) {
