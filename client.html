@@ -40,7 +40,7 @@
     <div class="partial" id="image-grid">
 
       {{#each images}}
-        <div class="preview" style="background-image: url({{this.thumbnail_url}})"></div>
+        <div class="preview" data-id="{{this.id}}" data-imageurl="{{this.imageurl}}" style="background-image: url({{this.thumbnail_url}})"></div>
       {{/each}}
       <div class="btn" id="newImageSearch">New search</div>
     </div>

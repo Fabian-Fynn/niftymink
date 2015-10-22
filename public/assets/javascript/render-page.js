@@ -52,6 +52,12 @@ function loadScripts(partial) {
         function() {
           renderPage('imageSearch');
         });
+      $('.preview').click(
+        function(e) {
+          var imageurl = $(this).attr('data-imageurl');
+          $('html').css('background-image', 'url(' + imageurl + ')');
+          localStorage.setItem('current-background', imageurl);
+      });
       break;
     default:
   }
