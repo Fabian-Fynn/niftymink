@@ -32,13 +32,10 @@ $(document).ready(function(){
 
   socket.on('newImages', function(res){
     renderPage('imageGrid', res);
-    //$('body').css('background-image', 'url(' + res + ')');
-    //localStorage.setItem('current-background', res);
     renderLoader(false);
   });
 
   socket.on('search-no-results', function() {
-    $('body').css('background-image', 'none');
     renderLoader(false);
   });
 

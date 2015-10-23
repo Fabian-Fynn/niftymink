@@ -54,7 +54,7 @@ var flickrRequest = function(req, iteration, callback){
         callback({images: images});
       }
       else {
-        return { error: 'No Results' };
+        callback({ error: 'No Results' });
       }
       if(err) { throw new Error(err); }
 
