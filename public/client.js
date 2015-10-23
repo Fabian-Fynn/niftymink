@@ -88,6 +88,14 @@ $(document).ready(function(){
     setColorScheme();
   });
 
+  $(document).keyup(function(e) {
+    if(e.which === 102 || e.which === 70) { // 'f' or 'F' -> search
+      renderPage('imageSearch');
+    } else if(e.which === 27) {
+      renderPage('index');
+    }
+  });
+
   renderPage('index');
 });
 
