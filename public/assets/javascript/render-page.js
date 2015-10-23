@@ -1,5 +1,6 @@
 function renderPage(request, resource) {
-  $('.partial').hide();
+  $('#yield').hide();
+  $('.index').hide();
 
   if(!request || request === 'index') {
     $('.index').show();
@@ -8,7 +9,7 @@ function renderPage(request, resource) {
   } else {
     $('#homeButton').show();
     $('body').removeClass('home');
-
+    $('#yield').show();
     var source;
 
     var selector = '#' + request + 'Source';
