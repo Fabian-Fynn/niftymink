@@ -41,11 +41,11 @@ var flickrRequest = function(req, iteration, callback){
           }
 
           image = result.photos.photo[i];
-          if(image.height_o > 1000 || image.height_l > 1000) {
+          if(image.height_o > 2000 || image.height_l > 2000) {
             if(typeof image.url_o === 'undefined') {
-              image.imageurl = image.url_o;
-            } else {
               image.imageurl = image.url_l;
+            } else {
+              image.imageurl = image.url_o;
             }
             image.thumbnail_url = image.url_m;
             images.push(image);
