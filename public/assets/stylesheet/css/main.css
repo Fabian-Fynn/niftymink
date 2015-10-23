@@ -15,6 +15,10 @@ body {
   color: #fff;
   height: 100%;
   background-color: rgba(32, 32, 32, 0.9);
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
 }
 
 body.home {
