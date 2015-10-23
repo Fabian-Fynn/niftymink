@@ -71,7 +71,13 @@ $(document).ready(function(){
   });
 
   $('#searchButton').click(function(e) {
-    renderPage('imageSearch');
+    if($(this).attr('data-target') === 'home') {
+      $(this).attr('data-target', 'imageSearch');
+      renderPage('imageSearch');
+    } else {
+      $(this).attr('data-target', 'home');
+      renderPage('index');
+    }
   });
 
   $('#homeButton').click(function(e) {
