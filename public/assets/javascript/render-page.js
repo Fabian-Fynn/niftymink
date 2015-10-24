@@ -48,6 +48,8 @@ function loadScripts(partial) {
           }
 
           socket.emit('search-request', req);
+
+          $('#no-results span').hide();
           renderLoader(true);
         }
       });

@@ -51,9 +51,12 @@ var flickrRequest = function(req, iteration, callback){
             images.push(image);
           }
         }
-        callback({images: images});
+
       }
-      else {
+      if(images && images.length > 0) {
+        callback({images: images});
+        return;
+      } else {
         callback({ error: 'No Results' });
       }
       if(err) { throw new Error(err); }

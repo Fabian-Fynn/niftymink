@@ -37,6 +37,7 @@ $(document).ready(function(){
 
   socket.on('search-no-results', function() {
     renderLoader(false);
+    $('#no-results span').show();
   });
 
   $('#name-field').on('keypress', function(e) {
