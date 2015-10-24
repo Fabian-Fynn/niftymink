@@ -87,9 +87,10 @@ $(document).ready(function(){
   });
 
   $(document).keyup(function(e) {
-    if(e.which === 102 || e.which === 70) { // 'f' or 'F' -> search
+   /* if($('body').hasClass('home') &&
+       (e.which === 102 || e.which === 70)) { // on index & 'f' or 'F' -> search
       renderPage('imageSearch');
-    } else if(e.which === 27) {
+    } else*/ if(e.which === 27) {
       renderPage('index');
     }
   });
