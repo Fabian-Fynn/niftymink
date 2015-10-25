@@ -2,6 +2,7 @@
   height: 5vh;
   padding: 0 15px 15px 15px; }
   .footer #login-button {
+    display: none;
     width: 1.4em;
     height: 1.4em;
     background: url("../../images/login.png");
