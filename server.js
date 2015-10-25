@@ -71,7 +71,7 @@ app.get('/auth/facebook/callback',
 passport.use(new FacebookStrategy({
     clientID: secrets.FACEBOOK_APP_ID,
     clientSecret: secrets.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:4000/auth/facebook/callback",
+    callbackURL: "http://niftymink.com/auth/facebook/callback",
     enableProof: false
   },
   function(accessToken, refreshToken, profile, done) {
