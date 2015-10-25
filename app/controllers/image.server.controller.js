@@ -13,7 +13,7 @@ exports.search = function(req, callback) {
 
 var flickrRequest = function(req, iteration, callback){
   var Flickr = require("flickrapi");
-  var flickrOptions = require('../../config/flickr.js').app;
+  var flickrOptions = require('../../config/secrets.js').flickr_app;
 
   Flickr.tokenOnly(flickrOptions, function(error, flickr) {
     flickr.photos.search({

@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/main.css">
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/loader.css">
     <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/image-search.css">
+    <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="assets/stylesheet/css/login.css">
   </head>
   <body>
     <div class="header">
@@ -28,6 +30,7 @@
       </div>
     </div>
     <div class="footer">
+      <div class="button colorized" id="login-button"></div>
     </div>
   </body>
   <script type="text/template" id="imageSearchSource">
@@ -50,6 +53,18 @@
         <div class="preview" data-id="{{this.id}}" data-imageurl="{{this.imageurl}}" style="background-image: url({{this.thumbnail_url}})"></div>
       {{/each}}
       <div class="btn" id="newImageSearch">New search</div>
+    </div>
+  </script>
+
+  <script type="text/template" id="loginSource">
+    <div class="form" id="login-form">
+      <h1>Want the good stuff?</h1>
+      <p>Loging in allows you to add images to your favorites, sync with multiple devices and much more :)</p>
+      <div class="login-strategies">
+        <div class="strategy facebook">
+          <a href="/auth/facebook"><img src="/assets/images/facebook.png"></a>
+        </div>
+      </div>
     </div>
   </script>
 

@@ -12,8 +12,8 @@ node_modules
 id_rsa*
 dist
 
-#flickr credentials
-config/flickr.js
+#credentials
+config/secrets.js
 
 #scss files
 scss/

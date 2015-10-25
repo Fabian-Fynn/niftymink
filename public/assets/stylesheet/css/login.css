@@ -1,0 +1,13 @@
+#login-form h1 {
+  margin-bottom: 20px; }
+#login-form .login-strategies {
+  margin: 20px auto;
+  width: 150px; }
+  #login-form .login-strategies .strategy {
+    width: 150px;
+    height: 150px; }
+    #login-form .login-strategies .strategy a, #login-form .login-strategies .strategy img {
+      height: 100%;
+      width: 100%; }
+
+/*# sourceMappingURL=login.css.map */

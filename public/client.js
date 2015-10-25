@@ -95,6 +95,10 @@ $(document).ready(function(){
     }
   });
 
+  $('#login-button').click(function(e) {
+    renderPage('login');
+  });
+
   renderPage('index');
 });
 

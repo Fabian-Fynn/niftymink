@@ -8,12 +8,5 @@
   overflow: hidden;
   background-size: cover;
   float: left; }
-#image-grid .btn {
-  border: 1px solid #fff;
-  font-size: 250%;
-  background: rgba(32, 32, 32, 0.5); }
-  #image-grid .btn:hover {
-    color: #fff;
-    background: rgba(32, 32, 32, 0.8); }
 
 /*# sourceMappingURL=image-search.css.map */
