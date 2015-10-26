@@ -1,22 +1,21 @@
 var express = require('express');
 var app = express();
-var path = require('path');
-var favicon = require('serve-favicon');
 var morgan = require('morgan');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var http = require('http').Server(app);
-var path = require('path');
 var fs = require('fs');
+var path = require('path');
 var io = require('socket.io')(http, {path: '/public/socket.io'})
 var _ = require('underscore');
-var config = require('./config/config');
-var secrets = require('./config/secrets.js');
 var mongoose = require('mongoose');
 var chalk = require('chalk');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+
+var config = require('./config/config');
+var secrets = require('./config/secrets.js');
+
 
 // Bootstrap db connection
 if ('development' === app.get('env')) {
@@ -28,43 +27,7 @@ else {
 
 //load all files in models dir
 fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
-  if (~filename.indexOf('.js')) require(__dirname + '/app//models/' + filename)
-});
-
-var Image = require('./app/controllers/image.server.controller.js');
-
-//express
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-//  app.use(favicon(__dirname + '/public/modules/core/img/favicon.ico'));
-app.use(morgan('combined'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(methodOverride('X-HTTP-Method-Override'))
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/client.html');
-});
-
-app.get('/users', function(req, res) {
-  mongoose.model('users').find(function(err, users) {
-    res.send(users);
-  });
-});
-
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
-  function(req, res){
-});
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
+  if (~filename.indexOf('.js')) require(__dirname + '/app/models/' + filename)
 });
 
 //passport
@@ -76,11 +39,30 @@ passport.use(new FacebookStrategy({
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      console.log(user);
       return done(err, user);
     });
   }
 ));
+
+//express
+var port = process.env.PORT || 4000;
+app.set('view engine', 'jade');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(morgan('dev'))
+app.use(cookieParser());
+app.use(session({
+  secret: 'secret',
+  resave: true,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//routes
+require('./app/routes.js')(app, passport);
+
+//Controllers
+var Image = require('./app/controllers/image.server.controller.js');
 
 //socket functions
 io.on('connection', function(socket) {
@@ -100,7 +82,7 @@ io.on('connection', function(socket) {
   });
 });
 
-http.listen(4000, function(){
+http.listen(port, function(){
   console.log('There we go ♕');
-  console.log('Gladly listening on http://127.0.0.1:4000');
+  console.log('Gladly listening on http://127.0.0.1:' + port);
 });

@@ -24,3 +24,6 @@ scss/
 
 #working files
 workspace
+
+#log files
+*.log
