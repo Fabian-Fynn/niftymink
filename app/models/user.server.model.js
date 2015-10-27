@@ -25,4 +25,18 @@ var UserSchema = new Schema({
   }
 });
 
-mongoose.model('users', UserSchema);
+UserSchema.findOrCreate = function(req, callback) {
+  User.findOne({'facebookId': req.id}, function(err, user) {
+    if(err) {
+      return callback(err);
+    }
+
+    if(user) {
+
+    } else {
+      var newUser = new User();
+      console.log(req);
+    }
+  });
+};
+module.exports = mongoose.model('users', UserSchema);

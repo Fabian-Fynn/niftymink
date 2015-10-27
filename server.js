@@ -11,7 +11,7 @@ var _ = require('underscore');
 var mongoose = require('mongoose');
 var chalk = require('chalk');
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+
 
 var config = require('./config/config');
 var secrets = require('./config/secrets.js');
@@ -30,25 +30,14 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
   if (~filename.indexOf('.js')) require(__dirname + '/app/models/' + filename)
 });
 
-//passport
-passport.use(new FacebookStrategy({
-    clientID: secrets.FACEBOOK_APP_ID,
-    clientSecret: secrets.FACEBOOK_APP_SECRET,
-    callbackURL: "http://niftymink.com/auth/facebook/callback",
-    enableProof: false
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
+//load other configs
+require('./config/passport')(passport, secrets);
 
 //express
 var port = process.env.PORT || 4000;
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(morgan('dev'))
+app.use(morgan('combined'))
 app.use(cookieParser());
 app.use(session({
   secret: 'secret',
