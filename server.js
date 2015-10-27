@@ -34,7 +34,7 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
 require('./config/passport')(passport, secrets);
 
 //express
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 4100;
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined'))
