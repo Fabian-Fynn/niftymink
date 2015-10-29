@@ -67,5 +67,6 @@ io.on('connection', function(socket) {
 
 http.listen(config.Port, function(){
   console.log('There we go ♕');
+  console.log(config.env);
   console.log('Gladly listening on http://127.0.0.1:' + config.Port);
 });

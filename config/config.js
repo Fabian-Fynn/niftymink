@@ -6,19 +6,22 @@
 var development = {
   Port : 4000,
   socketHost : '127.0.0.1',
-  db: 'mongodb://localhost/niftymink-dev'
+  db: 'mongodb://localhost/niftymink-dev',
+  env: 'DEVELOPMENT'
 };
 
 var staging = {
   Port : 4100,
   socketHost : '127.0.0.1',
-  db: 'mongodb://localhost/niftymink-staging'
+  db: 'mongodb://localhost/niftymink-staging',
+  env: 'STAGING'
 }
 
 var production = {
   Port : 4000,
   socketHost : '127.0.0.1',
-  db: 'mongodb://localhost/niftymink-prod'
+  db: 'mongodb://localhost/niftymink-prod',
+  env: 'PRODUCTION'
 }
 
 if(global.process.env.NODE_ENV === 'production') {
