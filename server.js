@@ -16,14 +16,8 @@ var passport = require('passport');
 var config = require('./config/config');
 var secrets = require('./config/secrets.js');
 
-
 // Bootstrap db connection
-if ('development' === app.get('env')) {
-  mongoose.connect(config.dev_db);
-}
-else {
-  console.log("Production");
-}
+mongoose.connect(config.db);
 
 //load all files in models dir
 fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
@@ -34,7 +28,7 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
 require('./config/passport')(passport, secrets);
 
 //express
-var port = process.env.PORT || 4100;
+//var port = process.env.PORT || 4100;
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined'))
@@ -71,7 +65,7 @@ io.on('connection', function(socket) {
   });
 });
 
-http.listen(port, function(){
+http.listen(config.Port, function(){
   console.log('There we go ♕');
-  console.log('Gladly listening on http://127.0.0.1:' + port);
+  console.log('Gladly listening on http://127.0.0.1:' + config.Port);
 });
