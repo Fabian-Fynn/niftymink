@@ -23,10 +23,10 @@ var production = {
 
 if(global.process.env.NODE_ENV === 'production') {
   var config = production;
-} else if(global.process.env.NODE_ENV === 'staging') {
-  var config = staging;
-} else {
+} else if(global.process.env.NODE_ENV ==='development') {
   var config = development;
+} else {
+  var config = staging;
 }
 
 module.exports = config;
