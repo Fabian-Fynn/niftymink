@@ -8,6 +8,16 @@ var mongoose = require('mongoose'),
     crypto = require('crypto');
 
 var UserSchema = new Schema({
+  local: {
+    email: {
+      type: String,
+      default: ''
+    },
+    password: {
+      type: String,
+      default: ''
+    }
+  },
   firstname: {
     type: String,
     trim: true,
@@ -17,26 +27,41 @@ var UserSchema = new Schema({
     type: String,
     trim: true,
     default: ''
-  },
-  email: {
-    type: String,
-    trim: true,
-    default: ''
   }
 });
 
 UserSchema.findOrCreate = function(req, callback) {
-  User.findOne({'facebookId': req.id}, function(err, user) {
-    if(err) {
-      return callback(err);
-    }
+  if(req.email) {
+    User.findOne({'local.email': req.email}, function(err, user) {
+      if(err) {
+        return callback(err);
+      } else if(user) {
 
-    if(user) {
+      } else { //newUser
+        var newUser = new User();
+        newUser.local.email = req.email;
+        newUser.local.password = req.password;
+        newUser.save(function(err){
+          if(err) {
+            throw err;
+          }
+          return callback(null, newUser, true);
+         });
+      }
+    });
+  } else if (req.facebookProfile) {
+    User.findOne({'facebookId': req.id}, function(err, user) {
+      if(err) {
+        return callback(err);
+      }
 
-    } else {
-      var newUser = new User();
-      console.log(req);
-    }
-  });
+      if(user) {
+
+      } else {
+        var newUser = new User();
+        console.log(req);
+      }
+    });
+  }
 };
 module.exports = mongoose.model('users', UserSchema);
