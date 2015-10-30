@@ -30,6 +30,10 @@ $(document).ready(function(){
     logout();
   });
 
+  socket.on('setTitle', function(res) {
+    document.title = 'Mink|' + res;
+  });
+
   socket.on('newImages', function(res){
     renderPage('imageGrid', res);
     renderLoader(false);

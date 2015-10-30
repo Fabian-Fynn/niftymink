@@ -28,7 +28,6 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
 require('./config/passport')(passport, secrets);
 
 //express
-//var port = process.env.PORT || 4100;
 app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined'))
@@ -51,6 +50,9 @@ var Image = require('./app/controllers/image.server.controller.js');
 io.on('connection', function(socket) {
   console.log(chalk.black.bgMagenta(' ♥ User connected ♥ '));
 
+  if(config.env !== 'PRODUCTION') {
+    socket.emit('setTitle', config.env);
+  }
   socket.on('search-request', function(req){
     console.log(chalk.black.bgWhite(' Searching for images '));
     Image.search(req, function(res) {
