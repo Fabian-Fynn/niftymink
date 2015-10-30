@@ -50,9 +50,6 @@ var Image = require('./app/controllers/image.server.controller.js');
 io.on('connection', function(socket) {
   console.log(chalk.black.bgMagenta(' ♥ User connected ♥ '));
 
-  if(config.env !== 'PRODUCTION') {
-    socket.emit('setTitle', config.env);
-  }
   socket.on('search-request', function(req){
     console.log(chalk.black.bgWhite(' Searching for images '));
     Image.search(req, function(res) {

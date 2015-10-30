@@ -1,9 +1,12 @@
-if (document.location.hostname == "localhost")
-  var socket = io.connect('localhost', {path: "/public/socket.io"});
-else
-  var socket = io.connect('http://niftymink.com', {path: "/public/socket.io"});
+var socket = io.connect(document.location.hostname, {path: "/public/socket.io"});
 
 $(document).ready(function(){
+  if(document.location.hostname === 'staging.niftymink.com') {
+    document.title = 'Mink|STAGING';
+  } else if(document.location.hostname === 'localhost') {
+    document.title = 'Mink|DEVELOPMENT';
+  }
+
   if (localStorage.getItem('current-background')) {
     $('html').css('background-image', 'url(' + localStorage.getItem('current-background') + ')');
   }
@@ -30,9 +33,7 @@ $(document).ready(function(){
     logout();
   });
 
-  socket.on('setTitle', function(res) {
-    document.title = 'Mink|' + res;
-  });
+
 
   socket.on('newImages', function(res){
     renderPage('imageGrid', res);
