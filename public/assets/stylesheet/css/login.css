@@ -2,10 +2,23 @@
   margin-bottom: 20px; }
 #login-form .login-strategies {
   margin: 20px auto;
-  width: 150px; }
+  width: 250px; }
   #login-form .login-strategies .strategy {
     width: 150px;
     height: 150px; }
+    #login-form .login-strategies .strategy.facebook {
+      margin: auto; }
+    #login-form .login-strategies .strategy.local {
+      margin-top: 25px; }
+      #login-form .login-strategies .strategy.local .btn {
+        font-size: 115%;
+        width: 250px;
+        margin: 25px auto; }
+      #login-form .login-strategies .strategy.local .btn input {
+        border: none;
+        width: auto;
+        height: auto;
+        padding: 0; }
     #login-form .login-strategies .strategy a, #login-form .login-strategies .strategy img {
       height: 100%;
       width: 100%; }
