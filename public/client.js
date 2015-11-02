@@ -5,6 +5,12 @@ $(document).ready(function(){
     document.title = 'Mink|STAGING';
   } else if(document.location.hostname === 'localhost') {
     document.title = 'Mink|DEVELOPMENT';
+    window.onerror = function (errorMsg, url, lineNumber) {
+      if(errorMsg === 'Uncaught ReferenceError: changeOutputText is not defined') {
+        window.setTimeout(window.location.reload(), 2000);
+      }
+      $('.footer').append('<p>Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + '</p>');
+    }
   }
 
   if (localStorage.getItem('current-background')) {
