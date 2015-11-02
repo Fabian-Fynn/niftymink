@@ -74,11 +74,11 @@ $(document).ready(function(){
   });
 
   $('#searchButton').click(function(e) {
-    if($(this).attr('data-target') === 'home') {
-      $(this).attr('data-target', 'imageSearch');
+    if($(this).attr('data-target') === 'imageSearch') {
+      $(this).attr('data-target', 'home');
       renderPage('imageSearch');
     } else {
-      $(this).attr('data-target', 'home');
+      $(this).attr('data-target', 'imageSearch');
       renderPage('index');
     }
   });
