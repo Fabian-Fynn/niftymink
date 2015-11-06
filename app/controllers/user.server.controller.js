@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User', 'UserSchema');
+    User = mongoose.model('User', 'UserSchema'),
+    mailer = require('../lib/mailer.js');
 
 exports.findOrCreate = function(req, callback) {
   if(req.email) {
@@ -21,6 +22,13 @@ exports.findOrCreate = function(req, callback) {
           if(err) {
             throw err;
           }
+          mailer.send_confirmation_mail(newUser.local.email, function(err, res){
+            if(err) {
+              console.log('Error: ', err);
+            } else {
+              console.log('Sucessfully sent mail: ', res);
+            }
+          });
           return callback(null, newUser, true);
        });
       }
