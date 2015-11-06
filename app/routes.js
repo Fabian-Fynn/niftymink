@@ -6,6 +6,12 @@ module.exports = function(app, passport) {
     res.sendFile(path.resolve(__dirname + '/../client.html'));
   });
 
+  app.post('/local-login', passport.authenticate('local-login', {
+    successRedirect: '/',
+    failureRedirect: '/',
+    failureFlash: true
+  }));
+
   app.get('/auth/facebook',
     passport.authenticate('facebook'),
     function(req, res){
@@ -18,7 +24,6 @@ module.exports = function(app, passport) {
   });
 
   app.get('/newuser/:firstname/:surname/:email', function(req, res) {
-    console.log('HERE');
     var newUser = new User();
     console.log(newUser);
     newUser.firstname = req.params.firstname;

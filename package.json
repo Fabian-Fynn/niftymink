@@ -4,7 +4,9 @@
   "main": "server.js",
   "description": "Everyday dashboard web app",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "chalk": "^1.1.1",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "express-session": "^1.11.3",

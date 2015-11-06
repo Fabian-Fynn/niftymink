@@ -11,7 +11,8 @@ var _ = require('underscore');
 var mongoose = require('mongoose');
 var chalk = require('chalk');
 var passport = require('passport');
-
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 
 var config = require('./config/config');
 var secrets = require('./config/secrets.js');
@@ -32,6 +33,7 @@ app.set('view engine', 'jade');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('combined'))
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'secret',
   resave: true,
@@ -39,6 +41,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 //routes
 require('./app/routes.js')(app, passport);
