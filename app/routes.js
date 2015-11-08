@@ -1,5 +1,6 @@
 var path = require('path');
 var User = require('./models/user.server.model.js');
+var imageController = require('./controllers/image.server.controller.js');
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res){
@@ -17,14 +18,13 @@ module.exports = function(app, passport) {
       res.redirect('/');
   });
 
-  app.get('/newuser/:firstname/:surname/:email', function(req, res) {
-    console.log('HERE');
-    var newUser = new User();
-    console.log(newUser);
-    newUser.firstname = req.params.firstname;
-    newUser.surname = req.params.surname;
-    newUser.email = req.params.email;
-    newUser.save();
-    console.log(newUser);
+  app.get('/getInfo/:id', function(req, res) {
+    imageController.save({ id: req.params.id }, function(err, res) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log(res);
+      }
+    });
   });
 }
