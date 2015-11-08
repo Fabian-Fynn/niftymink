@@ -20,11 +20,12 @@ module.exports = function(passport, secrets) {
   passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
+    imageField: 'image',
     passReqToCallback: true
   },
   function(req, email, password, callback) {
     process.nextTick(function() {
-      userController.findOrCreate({ 'email': email, 'password': password },
+      userController.findOrCreate({ 'email': email, 'password': password, image: req.body.image },
         function(err, user, isNewUser) {
           if(err){
             return callback(err);

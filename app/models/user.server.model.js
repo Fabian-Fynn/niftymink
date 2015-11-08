@@ -27,6 +27,11 @@ var UserSchema = new Schema({
     type: String,
     trim: true,
     default: ''
+  },
+  currentImage: {
+    type: String,
+    default: null,
+    ref: 'Image'
   }
 });
 

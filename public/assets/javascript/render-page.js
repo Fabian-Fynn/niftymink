@@ -67,7 +67,11 @@ function loadScripts(partial) {
           localStorage.setItem('current-background', imageurl);
       });
 
-      $('#searchButton').attr('data-target', 'imageSearch');
+     // $('#searchButton').attr('data-target', 'imageSearch');
+      break;
+    case 'login':
+      $('#currentImage').val(localStorage.getItem('current-background'));
+    console.log(localStorage.getItem('current-background'));
       break;
     default:
   }

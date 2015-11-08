@@ -29,6 +29,7 @@ exports.findOrCreate = function(req, callback) {
               console.log('Sucessfully sent mail: ', res);
             }
           });
+          storeCurrentImage({user: newUser, image: req.image});
           return callback(null, newUser, true);
        });
       }
@@ -46,4 +47,9 @@ exports.findOrCreate = function(req, callback) {
       }
     });
   }
+};
+
+var storeCurrentImage = function(req, res) {
+  req.user.currentImage = req.image;
+  req.user.save();
 };
