@@ -69,11 +69,11 @@ exports.save = function(req, callback) {
   var user = req.user;
 
 
-  getImageData({ id: req.id }, function(err, res) {
+  getImageData(req, function(err, res) {
     if(err) {
-      console.log(err);
+      throw ('Couldn`t get image data. Error:', err);
     } else {
-      var imageInfo = res.photo;
+      var imageInfo = res;
       var newImage = new Image();
       newImage.provider = 'flickr';
       newImage.providerId = imageInfo.id;
@@ -92,9 +92,11 @@ exports.save = function(req, callback) {
         locality: imageInfo.location.locality._content,
         country: imageInfo.location.country._content
       };
-      newImage.url = '';
+      newImage.photopageURL = imageInfo.urls.url[0]._content;
       newImage.shared = false;
       newImage.granted = false;
+      newImage.url = imageInfo.url;
+      newImage.originalUrl = imageInfo.originalUrl;
       newImage.save();
 
     }
@@ -103,7 +105,7 @@ exports.save = function(req, callback) {
 
 var getImageData = function(req, callback) {
 
-  var flickrRequest = function(req, iteration, callback){
+  var flickrRequest = function(req, callback){
     var Flickr = require("flickrapi");
     var flickrOptions = require('../../config/secrets.js').flickr_app;
 
@@ -119,5 +121,75 @@ var getImageData = function(req, callback) {
       });
     });
   };
-  flickrRequest(req, null, callback);
+  flickrRequest(req, function(err, res) {
+    if(err) {
+      return callback(err);
+    } else {
+      var imageData = res.photo;
+      getFlickrUrls( imageData.id, function(err, res){
+        if(err) {
+          return callback(err);
+        } else {
+          imageData.originalUrl = res.originalUrl;
+          imageData.url = res.selectedUrl;
+
+          return callback(null, imageData);
+        }
+      });
+    }
+  });
+};
+
+var getFlickrUrls = function(req, callback) {
+  var flickrRequest = function(req, callback){
+    var Flickr = require("flickrapi");
+    var flickrOptions = require('../../config/secrets.js').flickr_app;
+    Flickr.tokenOnly(flickrOptions, function(error, flickr) {
+      flickr.photos.getSizes({
+        api_key: flickrOptions.api_key,
+        photo_id: req
+      }, function(err, res) {
+        if(err) {
+          return callback(err);
+        } else {
+          return callback(null, res);
+        }
+      });
+    });
+  };
+
+  flickrRequest(req, function(err, res) {
+    if(err) {
+      return callback(err);
+    } else {
+      var imageSizes = res.sizes.size;
+      var urls = [];
+      var selectedImage = imageSizes[0];
+      var originalImage;
+
+      for (var i = imageSizes.length - 1; i >= 0; i--) {
+        var image = imageSizes[i];
+
+        if(imageSizes[i].label === 'Original') {
+          originalImage = image;
+        } else {
+
+          image.width = parseInt(image.width);
+          image.height = parseInt(image.height);
+
+          if(image.width > selectedImage.width) {
+            selectedImage = imageSizes[i];
+          } else {
+            break;
+          }
+        }
+      }
+
+      if(selectedImage.width < 1500) {
+        selectedImage = originalImage;
+      }
+    }
+
+    return callback(null, { selectedUrl: selectedImage.source, originalUrl: originalImage.source });
+  });
 };

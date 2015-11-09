@@ -70,6 +70,12 @@ var ImageSchema = new Schema({
   url: {
     type: String
   },
+  originalUrl: {
+    type: String
+  },
+  photopageURL: {
+    type: String
+  },
   shared: {
     type: Boolean,
     default: false
