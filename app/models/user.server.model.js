@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
     crypto = require('crypto');
 
-var UserSchema = new Schema({
+var Schema = new mongoose.Schema({
   local: {
     email: {
       type: String,
@@ -33,7 +33,6 @@ var UserSchema = new Schema({
     default: null,
     ref: 'Image'
   }
-});
+}, {collection: 'User'});
 
-
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', Schema, 'user');

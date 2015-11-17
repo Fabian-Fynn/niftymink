@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    User = mongoose.model('User', 'UserSchema'),
+    User = mongoose.model('User', 'user'),
     mailer = require('../lib/mailer.js');
 
 exports.findOrCreate = function(req, callback) {

@@ -3,15 +3,22 @@ var User = require('./models/user.server.model.js');
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res){
+    console.log('is auth:', req.isAuthenticated());
     res.sendFile(path.resolve(__dirname + '/../client.html'));
   });
 
   app.post('/local-login', passport.authenticate('local-login', {
-    successRedirect: '/',
-    failureRedirect: '/',
+    successRedirect: '/HEllO',
+    failureRedirect: '/false',
     failureFlash: true
   }));
 
+  app.get('/HEllo', isLoggedIn, function(req, res) {
+    console.log('route-session: ', req.session);
+  });
+  app.get('/testsession', isLoggedIn, function(req, res) {
+    res.redirect('/');
+  });
   app.get('/auth/facebook',
     passport.authenticate('facebook'),
     function(req, res){
@@ -32,4 +39,14 @@ module.exports = function(app, passport) {
     newUser.save();
     console.log(newUser);
   });
+
+  function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+      console.log('Welcome');
+      return next();
+    } else {
+      console.log(req.isAuthenticated());
+      console.log('Get lost!');
+    }
+  }
 }

@@ -11,6 +11,7 @@ module.exports = function(passport, secrets) {
   });
 
   passport.deserializeUser(function(id, done) {
+   var mongoose = require('mongoose');
     User.findById(id, function(err, user) {
       done(err, user);
     });
@@ -29,8 +30,13 @@ module.exports = function(passport, secrets) {
         function(err, user, isNewUser) {
           if(err){
             return callback(err);
-          } else {
+          } else if(isNewUser){//new User
             return callback(null, user, isNewUser);
+          } else if(user.local.password !== password) { //wrong password
+            console.log('Wrong password: ', password);
+            return callback(null, false);
+          } else { //login
+            return(callback(null, user, isNewUser));
           }
         }
       );
