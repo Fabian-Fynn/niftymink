@@ -21,15 +21,6 @@ $(document).ready(function(){
   renderUsername();
   setColorScheme(localStorage.getItem('scheme'));
 
-  $('.login-button').click(function(){
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', '/login');
-    form.style.display = 'hidden';
-    document.body.appendChild(form)
-    form.submit();
-  });
-
   socket.on('connected', function(res){
   });
 
@@ -38,8 +29,6 @@ $(document).ready(function(){
     changeOutputText("Conncection lost!","danger");
     logout();
   });
-
-
 
   socket.on('newImages', function(res){
     renderPage('imageGrid', res);
@@ -106,8 +95,12 @@ $(document).ready(function(){
     }
   });
 
-  $('#login-button').click(function(e) {
-    renderPage('login');
+  $('#user-button').click(function(e) {
+    if($(this).hasClass('login')) {
+       renderPage('login');
+    } else {
+      renderPage('userDetail');
+    }
   });
 
   renderPage('index');
@@ -187,3 +180,4 @@ function setColorScheme(scheme) {
     $('#schemeSwitch').css("transform","" );
   }
 }
+

@@ -1,7 +1,7 @@
 .footer {
   height: 5vh;
   padding: 0 15px 15px 15px; }
-  .footer #login-button {
+  .footer #user-button {
     width: 1.4em;
     height: 1.4em;
     background: url("../../images/login.png");
@@ -9,7 +9,7 @@
     float: left;
     font-size: 150%; }
 
-.home #login-button.dark {
+.home #user-button.dark {
   background-image: url("../../images/login-dark.png"); }
 
 /*# sourceMappingURL=footer.css.map */

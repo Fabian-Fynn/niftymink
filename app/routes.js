@@ -1,24 +1,21 @@
 var path = require('path');
-var User = require('./models/user.server.model.js');
+var User = require('./controllers/user.server.controller.js');
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res){
-    console.log('is auth:', req.isAuthenticated());
-    res.sendFile(path.resolve(__dirname + '/../client.html'));
+    var user = false;
+    if(req.user) {
+      user = req.user.firstname;
+    }
+    res.render(path.resolve(__dirname + '/../client.ejs'), {user: user});
   });
 
   app.post('/local-login', passport.authenticate('local-login', {
-    successRedirect: '/HEllO',
+    successRedirect: '/',
     failureRedirect: '/false',
     failureFlash: true
   }));
 
-  app.get('/HEllo', isLoggedIn, function(req, res) {
-    console.log('route-session: ', req.session);
-  });
-  app.get('/testsession', isLoggedIn, function(req, res) {
-    res.redirect('/');
-  });
   app.get('/auth/facebook',
     passport.authenticate('facebook'),
     function(req, res){
@@ -29,24 +26,4 @@ module.exports = function(app, passport) {
     function(req, res) {
       res.redirect('/');
   });
-
-  app.get('/newuser/:firstname/:surname/:email', function(req, res) {
-    var newUser = new User();
-    console.log(newUser);
-    newUser.firstname = req.params.firstname;
-    newUser.surname = req.params.surname;
-    newUser.email = req.params.email;
-    newUser.save();
-    console.log(newUser);
-  });
-
-  function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) {
-      console.log('Welcome');
-      return next();
-    } else {
-      console.log(req.isAuthenticated());
-      console.log('Get lost!');
-    }
-  }
 }

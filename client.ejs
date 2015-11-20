@@ -30,7 +30,10 @@
       </div>
     </div>
     <div class="footer">
-      <div class="button colorized" id="login-button"></div>
+      <div class="button colorized login" id="user-button"></div>
+      <% if(user) { %>
+        <div><p>Welcome, <%= user %></p></div>
+      <% } %>
     </div>
   </body>
   <script type="text/template" id="imageSearchSource">
@@ -78,7 +81,11 @@
       </div>
     </div>
   </script>
-
+  <script type="text/template" id="userDetailSource">
+    <div class="btn" id="logout-button">
+      Logout
+    </div>
+  </script>
   <script src="assets/javascript/functions.js"></script>
   <script src="assets/javascript/render-page.js"></script>
   <script src="assets/javascript/clock.js"></script>
