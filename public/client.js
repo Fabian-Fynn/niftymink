@@ -96,10 +96,10 @@ $(document).ready(function(){
   });
 
   $('#user-button').click(function(e) {
-    if($(this).hasClass('login')) {
-       renderPage('login');
-    } else {
+    if($(this).attr('data-target') === 'userDetail') {
       renderPage('userDetail');
+    } else {
+      renderPage('login');
     }
   });
 

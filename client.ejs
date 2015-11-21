@@ -30,9 +30,11 @@
       </div>
     </div>
     <div class="footer">
-      <div class="button colorized login" id="user-button"></div>
+
       <% if(user) { %>
-        <div><p>Welcome, <%= user %></p></div>
+        <div class="button colorized login" id="user-button" data-target="userDetail"></div>
+      <% } else { %>
+        <div class="button colorized login" id="user-button" data-target="login"></div>
       <% } %>
     </div>
   </body>
@@ -82,9 +84,14 @@
     </div>
   </script>
   <script type="text/template" id="userDetailSource">
-    <div class="btn" id="logout-button">
-      Logout
+    <div class="section details">
+      <p>Firstname: <%= user %></p>
     </div>
+    <a href='/logout'>
+      <div class="btn" id="logout-button">
+        Logout
+      </div>
+    </a>
   </script>
   <script src="assets/javascript/functions.js"></script>
   <script src="assets/javascript/render-page.js"></script>

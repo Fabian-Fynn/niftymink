@@ -68,7 +68,8 @@ function loadScripts(partial) {
       });
       break;
     case 'login':
-      $('#currentImage').val(localStorage.getItem('current-background'));
+      break;
+    case 'userDetail':
       break;
     default:
   }
