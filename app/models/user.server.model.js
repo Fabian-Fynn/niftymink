@@ -18,15 +18,12 @@ var Schema = new mongoose.Schema({
       default: ''
     }
   },
-  firstname: {
-    type: String,
-    trim: true,
-    default: ''
-  },
-  surname: {
-    type: String,
-    trim: true,
-    default: ''
+  public: {
+    firstname: {
+      type: String,
+      trim: true,
+      default: ''
+    }
   },
   currentImage: {
     type: String,

@@ -5,7 +5,7 @@ module.exports = function(app, passport) {
   app.get('/', function(req, res){
     var user = false;
     if(req.user) {
-      user = req.user.firstname;
+      user = req.user.public;
     }
     res.render(path.resolve(__dirname + '/../client.ejs'), {user: user});
   });
