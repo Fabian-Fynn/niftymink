@@ -32,7 +32,7 @@
     <div class="footer">
 
       <% if(user) { %>
-        <div class="button colorized login" id="user-button" data-target="userDetail"></div>
+        <div class="button colorized login" id="user-button" data-target="settings"></div>
       <% } else { %>
         <div class="button colorized login" id="user-button" data-target="login"></div>
       <% } %>
@@ -83,9 +83,10 @@
       </div>
     </div>
   </script>
-  <script type="text/template" id="userDetailSource">
+  <script type="text/template" id="settingsSource">
     <div class="section details">
-      <p>Firstname: <%= user %></p>
+      <h1>Settings</h1>
+      <p>Firstname: <input type="text" placeholder="<%= user.firstname %>">
     </div>
     <a href='/logout'>
       <div class="btn" id="logout-button">
@@ -93,7 +94,7 @@
       </div>
     </a>
   </script>
-  <script src="assets/javascript/functions.js"></script>
+  <script src="assets/javascript/helpers.js"></script>
   <script src="assets/javascript/render-page.js"></script>
   <script src="assets/javascript/clock.js"></script>
   <script src="client.js"></script>

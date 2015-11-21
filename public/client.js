@@ -21,6 +21,12 @@ $(document).ready(function(){
   renderUsername();
   setColorScheme(localStorage.getItem('scheme'));
 
+  var params = $.getQueryParameters();
+
+  if(params.page) {
+    renderPage(params.page);
+  }
+
   socket.on('connected', function(res){
   });
 
@@ -96,14 +102,14 @@ $(document).ready(function(){
   });
 
   $('#user-button').click(function(e) {
-    if($(this).attr('data-target') === 'userDetail') {
-      renderPage('userDetail');
+    if($(this).attr('data-target') === 'settings') {
+      renderPage('settings');
     } else {
       renderPage('login');
     }
   });
 
-  renderPage('index');
+  //renderPage('index');
 });
 
 function setUsername($element) {

@@ -1,7 +1,6 @@
 function renderPage(request, resource) {
   $('#yield').hide();
   $('.index').hide();
-
   if(!request || request === 'index') {
     $('.index').show();
     $('#homeButton').hide();
@@ -69,7 +68,7 @@ function loadScripts(partial) {
       break;
     case 'login':
       break;
-    case 'userDetail':
+    case 'settings':
       break;
     default:
   }
