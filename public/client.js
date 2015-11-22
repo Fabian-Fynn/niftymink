@@ -46,35 +46,6 @@ $(document).ready(function(){
     $('#no-results span').show();
   });
 
-  $('#name-field').on('keypress', function(e) {
-    if(e.which == 13) {
-      setFirstname($(this));
-      $(this).removeClass('editing');
-      $(this).blur();
-
-      e.preventDefault();
-    }
-  });
-
-  $('#name-field').on('change', function(e) {
-    setFirstname($(this));
-  });
-
-  $('#name-field').on('focusin', function(e) {
-    $(this).addClass('editing');
-    if($(this).hasClass('no-name')) {
-    }
-  });
-
-  $('#name-field').click(function(e) {
-    $(this).addClass('editing');
-    $(this).focus();
-  });
-
-  $('#name-field').on('focusout blur', function(e) {
-    $(this).removeClass('editing');
-  });
-
   $('#searchButton').click(function(e) {
     if($(this).attr('data-target') === 'imageSearch') {
       $(this).attr('data-target', 'home');
