@@ -48,15 +48,16 @@ $(document).ready(function(){
 
   $('#name-field').on('keypress', function(e) {
     if(e.which == 13) {
-      setUsername($(this));
+      setFirstname($(this));
       $(this).removeClass('editing');
       $(this).blur();
+
       e.preventDefault();
     }
   });
 
   $('#name-field').on('change', function(e) {
-    setUsername($(this));
+    setFirstname($(this));
   });
 
   $('#name-field').on('focusin', function(e) {
@@ -111,14 +112,6 @@ $(document).ready(function(){
 
   //renderPage('index');
 });
-
-function setUsername($element) {
-  var name = $element.html().replace(/&nbsp;|[-$%^&*()_+|~=`{}\[\]:";'<>?,.\/]|[0-9]/g,'').trim();
-
-  if(name != '')
-    localStorage.setItem('user-name', name);
-  $element.html(localStorage.getItem('user-name'));
-}
 
 function renderUsername() {
   var context = {

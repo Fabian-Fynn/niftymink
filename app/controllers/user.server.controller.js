@@ -49,6 +49,22 @@ exports.findOrCreate = function(req, callback) {
   }
 };
 
+exports.setFirstname = function(reqUser, firstname, callback) {
+  if(reqUser && firstname) {
+    User.findOne({'_id': reqUser._id}, function(err, user) {
+      if(err) {
+        return callback(err);
+      } else if(user) {
+        user.public.firstname = firstname;
+        user.save();
+        return callback(null, user);
+      } else {
+        return callback(null, null);
+      }
+    });
+  }
+};
+
 var storeCurrentImage = function(req, res) {
   req.user.currentImage = req.image;
   req.user.save();

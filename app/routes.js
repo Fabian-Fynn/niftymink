@@ -31,4 +31,10 @@ module.exports = function(app, passport) {
     function(req, res) {
       res.redirect('/');
   });
+
+  app.post('/changefirstname', function(req, res) {
+    if(req.isAuthenticated()) {
+      User.setFirstname(req.user, req.body.firstname, function(err, res) { });
+    }
+  });
 }
