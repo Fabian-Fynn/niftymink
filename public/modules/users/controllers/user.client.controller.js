@@ -17,3 +17,29 @@ function setFirstname($element) {
   }
   $element.html(localStorage.getItem('user-name'));
 }
+
+function renderUsername() {
+  var context = {
+    username: "Enter name"
+  };
+
+  var usernameSource = '<span id="name-field" contenteditable="true">{{username}}</span>';
+
+  $.ajax({
+    url: '/getfirstname',
+    type: 'GET',
+    complete: function(req, res) {
+      if(req.responseText) {
+        context.username = req.responseText;
+      } else if (localStorage.getItem('user-name')) {
+        context.username = localStorage.getItem('user-name');
+      } else {
+        context.username = 'Enter name';
+      }
+
+      var template = Handlebars.compile(usernameSource);
+      var html = template(context);
+      $('#username').html(html);
+    }
+  });
+}

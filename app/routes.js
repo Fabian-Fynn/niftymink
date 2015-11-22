@@ -37,4 +37,12 @@ module.exports = function(app, passport) {
       User.setFirstname(req.user, req.body.firstname, function(err, res) { });
     }
   });
+
+  app.get('/getfirstname', function(req, res) {
+    if(req.isAuthenticated()) {
+      res.send(req.user.public.firstname);
+    } else {
+      res.send(null);
+    }
+  });
 }
