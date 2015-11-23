@@ -67,6 +67,8 @@ function loadScripts(partial) {
       });
       break;
     case 'index':
+      $('#searchButton').attr('data-target', 'imageSearch');
+
       setTimeout(function() {
         $('.tooltips span').removeClass('invisible');
       }, 3000);
