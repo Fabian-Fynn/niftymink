@@ -55,10 +55,6 @@ function loadScripts(partial) {
 
       break;
     case 'imageGrid':
-      $('#newImageSearch').click(
-        function() {
-          renderPage('imageSearch');
-        });
       $('.preview').click(
         function(e) {
           var imageurl = $(this).attr('data-imageurl');
