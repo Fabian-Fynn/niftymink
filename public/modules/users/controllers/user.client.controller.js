@@ -1,6 +1,7 @@
 'use strict';
 
 var socket = io.connect(document.location.hostname, {path: '/public/socket.io'});
+
 function setFirstname($element) {
   var name = $element.html().replace(/&nbsp;|[-$%^&*()_+|~=`{}\[\]:";'<>?,.\/]|[0-9]/g,'').trim();
 

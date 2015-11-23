@@ -94,6 +94,14 @@
         Logout
       </div>
     </a>
+    <div class="delete-user">
+      <form method="post" action="/delete">
+        <p>Delete Account</p>
+        <p>Please enter your password to verify it`s you!</p>
+        <p><input type="password" name="password" value=""></p>
+        <p class="btn danger"><input type="submit" name="delete" value="Delete Account"></p>
+      </form>
+    </div>
   </script>
   <script src="assets/javascript/helpers.js"></script>
   <script src="assets/javascript/render-page.js"></script>

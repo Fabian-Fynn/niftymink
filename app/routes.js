@@ -21,6 +21,18 @@ module.exports = function(app, passport) {
     res.redirect('/');
   });
 
+  app.post('/delete', function(req, res) {
+    User.delete(req.user, req.password, function(err, success) {
+      if(err) {
+        res.redirect('/?delete=false&error=true');
+      } else if(success) {
+        res.redirect('/?delete=true');
+      } else {
+        res.redirect('/?delete=false');
+      }
+    });
+  });
+
   app.get('/auth/facebook',
     passport.authenticate('facebook'),
     function(req, res){

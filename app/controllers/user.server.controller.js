@@ -65,6 +65,16 @@ exports.setFirstname = function(reqUser, firstname, callback) {
   }
 };
 
+exports.delete = function(reqUser, password, callback) {
+  var user = User.findOne({ '_id': reqUser._id }, function(err, user) {
+    if(err) {
+      return callback(err);
+    } else {
+      return callback(null, true);
+    }
+  });
+}
+
 var storeCurrentImage = function(req, res) {
   req.user.currentImage = req.image;
   req.user.save();
