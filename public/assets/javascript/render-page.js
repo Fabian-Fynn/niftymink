@@ -30,8 +30,8 @@ function renderPage(request, resource) {
     var html = template(context);
 
     $('#yield').html(html);
-    loadScripts(request);
   }
+    loadScripts(request);
 }
 
 function loadScripts(partial) {
@@ -65,6 +65,12 @@ function loadScripts(partial) {
           $('html').css('background-image', 'url(' + imageurl + ')');
           localStorage.setItem('current-background', imageurl);
       });
+      break;
+    case 'index':
+      setTimeout(function() {
+        $('.tooltips span').removeClass('invisible');
+      }, 3000);
+
       break;
     case 'login':
       break;

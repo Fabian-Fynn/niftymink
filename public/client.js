@@ -81,7 +81,7 @@ $(document).ready(function(){
     }
   });
 
-  //renderPage('index');
+  renderPage('index');
 });
 
 function renderLoader(show) {
