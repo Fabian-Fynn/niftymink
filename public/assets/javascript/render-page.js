@@ -1,7 +1,6 @@
 function renderPage(request, resource) {
   $('#yield').hide();
   $('.index').hide();
-
   if(!request || request === 'index') {
     $('.index').show();
     $('#homeButton').hide();
@@ -31,8 +30,8 @@ function renderPage(request, resource) {
     var html = template(context);
 
     $('#yield').html(html);
-    loadScripts(request);
   }
+    loadScripts(request);
 }
 
 function loadScripts(partial) {
@@ -56,10 +55,6 @@ function loadScripts(partial) {
 
       break;
     case 'imageGrid':
-      $('#newImageSearch').click(
-        function() {
-          renderPage('imageSearch');
-        });
       $('.preview').click(
         function(e) {
           var imageurl = $(this).attr('data-imageurl');
@@ -68,6 +63,18 @@ function loadScripts(partial) {
       });
 
       $('#searchButton').attr('data-target', 'imageSearch');
+      break;
+    case 'index':
+      $('#searchButton').attr('data-target', 'imageSearch');
+
+      setTimeout(function() {
+        $('.tooltips span').removeClass('invisible');
+      }, 3000);
+
+      break;
+    case 'login':
+      break;
+    case 'settings':
       break;
     default:
   }

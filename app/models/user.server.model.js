@@ -5,9 +5,9 @@
  *   */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-    crypto = require('crypto');
+  bcrypt = require('bcrypt');
 
-var UserSchema = new Schema({
+var Schema = new mongoose.Schema({
   local: {
     email: {
       type: String,
@@ -18,50 +18,26 @@ var UserSchema = new Schema({
       default: ''
     }
   },
-  firstname: {
-    type: String,
-    trim: true,
-    default: ''
+  public: {
+    firstname: {
+      type: String,
+      trim: true,
+      default: ''
+    }
   },
-  surname: {
+  currentImage: {
     type: String,
-    trim: true,
-    default: ''
+    default: null,
+    ref: 'Image'
   }
-});
+}, {collection: 'User'});
 
-UserSchema.findOrCreate = function(req, callback) {
-  if(req.email) {
-    User.findOne({'local.email': req.email}, function(err, user) {
-      if(err) {
-        return callback(err);
-      } else if(user) {
+Schema.statics.encryptPassword = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+}
 
-      } else { //newUser
-        var newUser = new User();
-        newUser.local.email = req.email;
-        newUser.local.password = req.password;
-        newUser.save(function(err){
-          if(err) {
-            throw err;
-          }
-          return callback(null, newUser, true);
-         });
-      }
-    });
-  } else if (req.facebookProfile) {
-    User.findOne({'facebookId': req.id}, function(err, user) {
-      if(err) {
-        return callback(err);
-      }
+Schema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password);
+}
 
-      if(user) {
-
-      } else {
-        var newUser = new User();
-        console.log(req);
-      }
-    });
-  }
-};
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('User', Schema, 'user');
