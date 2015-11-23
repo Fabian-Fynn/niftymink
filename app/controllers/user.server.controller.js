@@ -17,7 +17,7 @@ exports.findOrCreate = function(req, callback) {
       } else { //newUser
         var newUser = new User();
         newUser.local.email = req.email;
-        newUser.local.password = req.password;
+        newUser.local.password = User.encryptPassword(req.password);
         newUser.save(function(err){
           if(err) {
             throw err;
@@ -62,15 +62,20 @@ exports.setFirstname = function(reqUser, firstname, callback) {
         return callback(null, null);
       }
     });
-  }
-};
+  }};
 
 exports.delete = function(reqUser, password, callback) {
-  var user = User.findOne({ '_id': reqUser._id }, function(err, user) {
+  User.findOne({ '_id': reqUser._id }, function(err, user) {
     if(err) {
       return callback(err);
     } else {
-      return callback(null, true);
+      user.remove(function(err) {
+        if(err) {
+          return callback(err);
+        } else {
+          return callback(null, true);
+        }
+      });
     }
   });
 }

@@ -5,7 +5,7 @@
  *   */
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema,
-    crypto = require('crypto');
+  bcrypt = require('bcrypt');
 
 var Schema = new mongoose.Schema({
   local: {
@@ -31,5 +31,13 @@ var Schema = new mongoose.Schema({
     ref: 'Image'
   }
 }, {collection: 'User'});
+
+Schema.statics.encryptPassword = function(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
+}
+
+Schema.methods.validatePassword = function(password) {
+  return bcrypt.compareSync(password, this.local.password);
+}
 
 module.exports = mongoose.model('User', Schema, 'user');

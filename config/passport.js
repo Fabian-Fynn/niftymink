@@ -32,7 +32,7 @@ module.exports = function(passport, secrets) {
             return callback(err);
           } else if(isNewUser){//new User
             return callback(null, user, isNewUser);
-          } else if(user.local.password !== password) { //wrong password
+          } else if(!user.validatePassword(password)) { //wrong password
             console.log('Wrong password: ', password);
             return callback(null, false);
           } else { //login
