@@ -13,6 +13,7 @@ var chalk = require('chalk');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+var MongoStore = require('connect-mongo')(session);
 
 //configs
 var config = require('./config/config');
@@ -33,7 +34,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'secret',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 180 * 24 * 60 * 60
+  })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
