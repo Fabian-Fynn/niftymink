@@ -9,10 +9,10 @@ $(document).ready(function() {
       } else {
         $('body').animate({backgroundColor: '#0091c2'}, 1500);
       }
-      html = '<h1 class="icon-'+weather.code+'"></h1>';
-      html += '<h2>'+weather.temp+'&deg;</h2>';
-      html += '<ul><li>'+weather.city+', '+weather.region+'</li>';
-      html += '<li class="currently">'+weather.currently+'</li></ul>';
+      html = '<h2>'+weather.temp+'&deg;</h2>';
+      html += '<i class="icon-'+weather.code+'"></i>';
+      html += '<p>'+weather.city+'</p>';
+      //html += '<li class="currently">'+weather.currently+'</li></ul>';
       //html += '<li>'+weather.tempAlt+'&deg;C</li></ul>';
 
       //var timestamp = moment(weather.updated);
