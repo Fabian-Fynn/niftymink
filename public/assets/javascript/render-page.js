@@ -1,4 +1,4 @@
-function renderPage(request, resource) {
+function renderPage(request, resource, flashMessage) {
   $('#yield').hide();
   $('.index').hide();
   if(!request || request === 'index') {
@@ -32,6 +32,10 @@ function renderPage(request, resource) {
     $('#yield').html(html);
   }
     loadScripts(request);
+
+    if(flashMessage) {
+      renderMessage(flashMessage);
+    }
 }
 
 function loadScripts(partial) {
@@ -77,5 +81,17 @@ function loadScripts(partial) {
     case 'settings':
       break;
     default:
+  }
+}
+
+function renderMessage(reason) {
+  switch(reason) {
+    case 'invalidLogin':
+      $('#flash div').text('Email or password incorrect');
+      setTimeout(function() {
+        $('#flash').slideDown();
+      }, 1000);
+
+    break;
   }
 }

@@ -12,7 +12,7 @@ module.exports = function(app, passport) {
 
   app.post('/local-login', passport.authenticate('local-login', {
     successRedirect: '/',
-    failureRedirect: '/false',
+    failureRedirect: '/?login=invalid',
     failureFlash: true
   }));
 

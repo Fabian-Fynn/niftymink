@@ -33,7 +33,6 @@ module.exports = function(passport, secrets) {
           } else if(isNewUser){//new User
             return callback(null, user, isNewUser);
           } else if(!user.validatePassword(password)) { //wrong password
-            console.log('Wrong password: ', password);
             return callback(null, false);
           } else { //login
             return(callback(null, user, isNewUser));

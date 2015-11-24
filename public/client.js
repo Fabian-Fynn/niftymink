@@ -21,12 +21,16 @@ $(document).ready(function(){
   renderUsername();
   setColorScheme(localStorage.getItem('scheme'));
 
+
   var params = $.getQueryParameters();
 
   if(params.page) {
     renderPage(params.page);
+  } else if(params.login === 'invalid') {
+    renderPage('login', null, 'invalidLogin');
+  } else {
+    renderPage('index');
   }
-
   socket.on('connected', function(res){
   });
 
@@ -81,7 +85,7 @@ $(document).ready(function(){
     }
   });
 
-  renderPage('index');
+
 });
 
 function renderLoader(show) {
