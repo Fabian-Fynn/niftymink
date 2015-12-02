@@ -11,13 +11,16 @@ $(document).ready(function() {
       }
       html = '<h2>'+weather.temp+'&deg;</h2>';
       html += '<i class="icon-'+weather.code+'"></i>';
-      html += '<p>'+weather.city+'</p>';
+      html += '<p id="city">'+weather.city+'</p>';
       //html += '<li class="currently">'+weather.currently+'</li></ul>';
       //html += '<li>'+weather.tempAlt+'&deg;C</li></ul>';
 
       //var timestamp = moment(weather.updated);
       //html += '<p class="updated">Updated '+moment(timestamp).fromNow()+'</p>';
       $("#weather").html(html);
+      $("#weather .city").click(function(e) {
+        
+      });
     },
     error: function(error) {
       $("#weather").html('<p>'+error+'</p>');
