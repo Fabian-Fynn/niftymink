@@ -18,6 +18,12 @@ var Schema = new mongoose.Schema({
       default: ''
     }
   },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  },
   public: {
     firstname: {
       type: String,

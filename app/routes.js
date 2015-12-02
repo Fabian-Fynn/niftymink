@@ -11,14 +11,14 @@ module.exports = function(app, passport) {
   });
 
   app.post('/local-login', passport.authenticate('local-login', {
-    successRedirect: '/',
+    successRedirect: '/?login=valid',
     failureRedirect: '/?login=invalid',
     failureFlash: true
   }));
 
   app.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    res.redirect('/?logout=true');
   });
 
   app.post('/delete', function(req, res) {
@@ -33,16 +33,12 @@ module.exports = function(app, passport) {
     });
   });
 
-  app.get('/auth/facebook',
-    passport.authenticate('facebook'),
-    function(req, res){
-  });
+  app.get('/auth/facebook', passport.authenticate('facebook-login'));
 
   app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/login' }),
-    function(req, res) {
-      res.redirect('/');
-  });
+    passport.authenticate('facebook-login', { successRedirect: '/',
+                                        failureRedirect: '/login' })
+  );
 
   app.post('/changefirstname', function(req, res) {
     if(req.isAuthenticated()) {

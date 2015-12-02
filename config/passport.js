@@ -1,6 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-
 var User = require('../app/models/user.server.model');
 var userController = require('../app/controllers/user.server.controller.js');
 
@@ -43,16 +42,17 @@ module.exports = function(passport, secrets) {
   }
   ));
   //facebook
-  /*passport.use('facebook-login', new FacebookStrategy({
+  passport.use('facebook-login', new FacebookStrategy({
       clientID: secrets.FACEBOOK_APP_ID,
       clientSecret: secrets.FACEBOOK_APP_SECRET,
-      callbackURL: secrets.FACEBOOK_CALLBACK_URL,
-      enableProof: false
+      callbackURL: secrets.FACEBOOK_CALLBACK_URL
     },
     function(accessToken, refreshToken, profile, done) {
-      User.findOrCreate({'facebookProfile': profile}, function (err, user) {
-        return done(err, user);
+      process.nextTick(function(){
+        User.findOrCreate({'facebookProfile': profile}, function (err, user) {
+          return done(err, user);
+        });
       });
     }
-  ));*/
+  ));
 }

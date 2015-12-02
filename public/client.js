@@ -28,6 +28,8 @@ $(document).ready(function(){
     renderPage(params.page);
   } else if(params.login === 'invalid') {
     renderPage('login', null, 'invalidLogin');
+  } else if(params.login === 'valid') {
+    renderPage('index', null, 'validLogin');
   } else {
     renderPage('index');
   }
