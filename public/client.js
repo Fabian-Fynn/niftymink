@@ -21,15 +21,18 @@ $(document).ready(function(){
   renderUsername();
   setColorScheme(localStorage.getItem('scheme'));
 
-  $('.login-button').click(function(){
-    var form = document.createElement('form');
-    form.setAttribute('method', 'post');
-    form.setAttribute('action', '/login');
-    form.style.display = 'hidden';
-    document.body.appendChild(form)
-    form.submit();
-  });
 
+  var params = $.getQueryParameters();
+
+  if(params.page) {
+    renderPage(params.page);
+  } else if(params.login === 'invalid') {
+    renderPage('login', null, 'invalidLogin');
+  } else if(params.login === 'valid') {
+    renderPage('index', null, 'validLogin');
+  } else {
+    renderPage('index');
+  }
   socket.on('connected', function(res){
   });
 
@@ -39,8 +42,6 @@ $(document).ready(function(){
     logout();
   });
 
-
-
   socket.on('newImages', function(res){
     renderPage('imageGrid', res);
     renderLoader(false);
@@ -49,34 +50,6 @@ $(document).ready(function(){
   socket.on('search-no-results', function() {
     renderLoader(false);
     $('#no-results span').show();
-  });
-
-  $('#name-field').on('keypress', function(e) {
-    if(e.which == 13) {
-      setUsername($(this));
-      $(this).removeClass('editing');
-      $(this).blur();
-      e.preventDefault();
-    }
-  });
-
-  $('#name-field').on('change', function(e) {
-    setUsername($(this));
-  });
-
-  $('#name-field').on('focusin', function(e) {
-    $(this).addClass('editing');
-    if($(this).hasClass('no-name')) {
-    }
-  });
-
-  $('#name-field').click(function(e) {
-    $(this).addClass('editing');
-    $(this).focus();
-  });
-
-  $('#name-field').on('focusout blur', function(e) {
-    $(this).removeClass('editing');
   });
 
   $('#searchButton').click(function(e) {
@@ -106,38 +79,16 @@ $(document).ready(function(){
     }
   });
 
-  $('#login-button').click(function(e) {
-    renderPage('login');
+  $('#user-button').click(function(e) {
+    if($(this).attr('data-target') === 'settings') {
+      renderPage('settings');
+    } else {
+      renderPage('login');
+    }
   });
 
-  renderPage('index');
+
 });
-
-function setUsername($element) {
-  var name = $element.html().replace(/&nbsp;|[-$%^&*()_+|~=`{}\[\]:";'<>?,.\/]|[0-9]/g,'').trim();
-
-  if(name != '')
-    localStorage.setItem('user-name', name);
-  $element.html(localStorage.getItem('user-name'));
-}
-
-function renderUsername() {
-  var context = {
-    username: "Enter name"
-  };
-
-  var usernameSource = '<span id="name-field" contenteditable="true">{{username}}</span>';
-
-  if (localStorage.getItem('user-name')) {
-    context.username = localStorage.getItem('user-name');
-  } else {
-    context.username = 'Enter name';
-  }
-
-  var template = Handlebars.compile(usernameSource);
-  var html = template(context);
-  $('#username').html(html);
-}
 
 function renderLoader(show) {
   var cubeSource = '<div class="cube">    <div class="ani1">\
@@ -187,3 +138,4 @@ function setColorScheme(scheme) {
     $('#schemeSwitch').css("transform","" );
   }
 }
+

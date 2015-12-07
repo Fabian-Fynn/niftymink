@@ -11,10 +11,14 @@ var _ = require('underscore');
 var mongoose = require('mongoose');
 var chalk = require('chalk');
 var passport = require('passport');
+var bodyParser = require('body-parser');
+var flash = require('connect-flash');
+var MongoStore = require('connect-mongo')(session);
 
-
+//configs
 var config = require('./config/config');
 var secrets = require('./config/secrets.js');
+require('./config/passport')(passport, secrets);
 
 // Bootstrap db connection
 mongoose.connect(config.db);
@@ -24,24 +28,27 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
   if (~filename.indexOf('.js')) require(__dirname + '/app/models/' + filename)
 });
 
-//load other configs
-require('./config/passport')(passport, secrets);
-
-//express
-app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(morgan('combined'))
+//app.use(morgan('combined'))
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'secret',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 180 * 24 * 60 * 60
+  })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+//app.use('view engine', 'ejs');
 
 //routes
 require('./app/routes.js')(app, passport);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Controllers
 var Image = require('./app/controllers/image.server.controller.js');

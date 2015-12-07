@@ -1,13 +1,18 @@
 .footer {
-  height: 5vh;
-  padding: 0 15px 15px 15px; }
-  .footer #login-button {
-    width: 1.4em;
-    height: 1.4em;
-    background: url("../../images/login.png");
-    background-size: contain;
-    float: left;
-    font-size: 150%; }
+  height: 7vh;
+  padding: 0 15px 0 15px; }
+  .footer .user-button-container {
+    height: 45px;
+    width: 10vw;
+    bottom: 0;
+    position: absolute; }
+    .footer .user-button-container #user-button {
+      width: 1.4em;
+      height: 1.4em;
+      background: url("../../images/login.png");
+      background-size: contain;
+      float: left;
+      font-size: 150%; }
 
 .home #login-button.dark {
   background-image: url("../../images/login-dark.png"); }
