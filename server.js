@@ -31,7 +31,7 @@ fs.readdirSync(__dirname + '/app/models').forEach(function(filename) {
 //app.use(morgan('combined'))
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
+var sessionMiddleware = session({
   secret: 'secret',
   resave: true,
   saveUninitialized: false,
@@ -39,7 +39,9 @@ app.use(session({
     mongooseConnection: mongoose.connection,
     ttl: 180 * 24 * 60 * 60
   })
-}));
+});
+
+app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -52,10 +54,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Controllers
 var Image = require('./app/controllers/image.server.controller.js');
-
+var User = require('./app/controllers/user.server.controller.js');
 //socket functions
+
+io.use(function(socket, next) {
+  sessionMiddleware(socket.request, socket.request.res, next);
+});
+
 io.on('connection', function(socket) {
   console.log(chalk.black.bgMagenta(' ♥ User connected ♥ '));
+  if(socket.request.session) {
+    User.findById(
+      { id: socket.request.session.passport.user },
+        function(err, user) {
+          if(err) {
+            console.log('error');
+          } else if(user) {
+            socket.user = user;
+          } else {
+            console.log('No user found');
+          }
+    });
+  }
+
+  socket.on('login', function(req) {
+
+  });
 
   socket.on('search-request', function(req){
     console.log(chalk.black.bgWhite(' Searching for images '));
@@ -68,6 +92,32 @@ io.on('connection', function(socket) {
         }
       }
     });
+  });
+
+  socket.on('set-current-image', function(imageUrl){
+    if(socket.user) {
+      socket.user.setCurrentImage(
+        { imageUrl: imageUrl },
+          function(err, ok) {
+            if(err) {
+              console.log('error');
+            } else if(ok) {
+              console.log('image saved');
+            } else {
+              console.log('Not saved');
+            }
+      });
+    }
+  });
+
+  socket.on('getBackgroundImage', function() {
+    if(socket.user) {
+      socket.user.getCurrentImage(function(imageUrl) {
+        if(imageUrl) {
+          socket.emit('receiveBackgroundImage', imageUrl);
+        }
+     });
+    }
   });
 });
 

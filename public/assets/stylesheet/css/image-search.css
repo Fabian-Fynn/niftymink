@@ -7,6 +7,30 @@
   margin: 1vw;
   overflow: hidden;
   background-size: cover;
-  float: left; }
+  float: left;
+  position: relative; }
+  #image-grid .preview .favorite {
+    position: absolute;
+    right: 0;
+    bottom: -3px;
+    border: none;
+    font-size: 40px;
+    /*@media not (-webkit-min-device-pixel-ratio:0) {
+      filter: glow(color=black,strength=1);
+      text-shadow: -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;
+    }*/ }
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      #image-grid .preview .favorite {
+        -webkit-text-stroke: 1.5px #555; } }
+    #image-grid .preview .favorite.faved {
+      color: #f00; }
+    #image-grid .preview .favorite:hover {
+      color: #f77;
+      background: none; }
+      #image-grid .preview .favorite:hover.faved {
+        color: #f00; }
 
 /*# sourceMappingURL=image-search.css.map */

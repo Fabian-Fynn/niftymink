@@ -34,7 +34,7 @@
     </div>
     <div class="footer">
       <div class="user-button-container">
-        <% if(user) { %>
+        <% if(user) {%>
           <div class="button colorized login" id="user-button" data-target="settings"></div>
         <% } else { %>
           <div class="button colorized login" id="user-button" data-target="login"></div>
@@ -44,7 +44,7 @@
 
       <div id="weather"><img src="assets/images/loader.gif" alt="Loading..." class="loading"><br />Loading...</div>
     </div>
-  </body>
+    </body>
   <script type="text/template" id="imageSearchSource">
     <div class="search-box partial">
       <h1>Image search</h1>
@@ -62,7 +62,9 @@
     <div class="partial" id="image-grid">
 
       {{#each images}}
-        <div class="preview" data-id="{{this.id}}" data-imageurl="{{this.imageurl}}" style="background-image: url({{this.thumbnail_url}})"></div>
+        <div class="preview" data-id="{{this.id}}" data-imageurl="{{this.imageurl}}" style="background-image: url({{this.thumbnail_url}})">
+          <div class="btn favorite">&#9829;</div>
+        </div>
       {{/each}}
     </div>
   </script>
@@ -116,5 +118,4 @@
   <script src="vendor/jquery.simpleWeather.min.js"></script>
   <script src="assets/javascript/weather.js"></script>
   <script src="client.js"></script>
-
 </html>

@@ -13,14 +13,10 @@ $(document).ready(function(){
     }
   }
 
-  if (localStorage.getItem('current-background')) {
-    $('html').css('background-image', 'url(' + localStorage.getItem('current-background') + ')');
-  }
-
+  getBackgroundImage();
   startTime();
   renderUsername();
   setColorScheme(localStorage.getItem('scheme'));
-
 
   var params = $.getQueryParameters();
 
@@ -50,6 +46,11 @@ $(document).ready(function(){
   socket.on('search-no-results', function() {
     renderLoader(false);
     $('#no-results span').show();
+  });
+
+  socket.on('receiveBackgroundImage', function(imageUrl) {
+    $('html').css('background-image', 'url(' + imageUrl + ')');
+    localStorage.setItem('current-background', imageUrl);
   });
 
   $('#searchButton').click(function(e) {
@@ -86,8 +87,6 @@ $(document).ready(function(){
       renderPage('login');
     }
   });
-
-
 });
 
 function renderLoader(show) {
@@ -139,3 +138,10 @@ function setColorScheme(scheme) {
   }
 }
 
+function getBackgroundImage() {
+  if (localStorage.getItem('current-background')) {
+    $('html').css('background-image', 'url(' + localStorage.getItem('current-background') + ')');
+  }
+
+  socket.emit('getBackgroundImage');
+}

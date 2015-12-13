@@ -1,10 +1,6 @@
 var path = require('path');
-<<<<<<< HEAD
-var User = require('./models/user.server.model.js');
 var imageController = require('./controllers/image.server.controller.js');
-=======
 var User = require('./controllers/user.server.controller.js');
->>>>>>> master
 
 module.exports = function(app, passport) {
   app.get('/', function(req, res){
@@ -12,7 +8,7 @@ module.exports = function(app, passport) {
     if(req.user) {
       user = req.user.public;
     }
-    res.render(path.resolve(__dirname + '/../client.ejs'), {user: user});
+    res.render(path.resolve(__dirname + '/../client.ejs'), {user: user, test: 'test'});
   });
 
   app.post('/local-login', passport.authenticate('local-login', {
@@ -56,9 +52,9 @@ module.exports = function(app, passport) {
       if(err) {
         console.log(err);
       } else {
-        console.log(res);
       }
     });
+  });
 
   app.get('/getfirstname', function(req, res) {
     if(req.isAuthenticated()) {

@@ -37,6 +37,15 @@ var Schema = new mongoose.Schema({
   }
 }, {collection: 'User'});
 
+Schema.methods.setCurrentImage = function setCurrentImage(req, callback){
+  this.currentImage = req.imageUrl;
+  this.save();
+};
+
+Schema.methods.getCurrentImage = function getCurrentImage(callback) {
+  return callback(this.currentImage);
+};
+
 Schema.statics.encryptPassword = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
 }

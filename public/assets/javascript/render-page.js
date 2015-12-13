@@ -64,6 +64,13 @@ function loadScripts(partial) {
           var imageurl = $(this).attr('data-imageurl');
           $('html').css('background-image', 'url(' + imageurl + ')');
           localStorage.setItem('current-background', imageurl);
+          socket.emit('set-current-image', imageurl);
+      });
+
+      $('.preview .favorite').click(
+        function(e) {
+          $(this).addClass('faved');
+
       });
 
       $('#searchButton').attr('data-target', 'imageSearch');
@@ -77,6 +84,7 @@ function loadScripts(partial) {
 
       break;
     case 'login':
+      $('input:submit').click(socket.emit('login', 'test'));
       break;
     case 'settings':
       break;
